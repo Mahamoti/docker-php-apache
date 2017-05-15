@@ -1,0 +1,80 @@
+version: "2"
+
+services:
+  php56_standard:
+    build:
+      context: .
+      dockerfile: Dockerfile.php56
+    ports:
+      - "561:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./public:/var/www/public
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=standard
+
+  php56_symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile.php56
+    ports:
+      - "562:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./web:/var/www/web
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=symfony
+
+  php70_standard:
+    build:
+      context: .
+      dockerfile: Dockerfile.php70
+    ports:
+      - "701:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./public:/var/www/public
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=standard
+
+  php70_symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile.php70
+    ports:
+      - "702:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./web:/var/www/web
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=symfony
+
+  php71_standard:
+    build:
+      context: .
+      dockerfile: Dockerfile.php71
+    ports:
+      - "711:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./public:/var/www/public
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=standard
+
+  php71_symfony:
+    build:
+      context: .
+      dockerfile: Dockerfile.php71
+    ports:
+      - "712:80"
+    volumes:
+      - ./includes:/var/www/includes
+      - ./web:/var/www/web
+    environment:
+      - APP_ENV=production
+      - APP_VHOST=symfony
