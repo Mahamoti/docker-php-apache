@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>docker-php-apache</h1>
+    <h1>php-apache</h1>
 </div>
 
 <ul class="nav nav-pills">

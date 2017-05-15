@@ -92,5 +92,5 @@ docker-compose stop
 
 ## links 
 
-- https://hub.docker.com/r/elnebuloso/docker-php-apache/
-- https://hub.docker.com/r/elnebuloso/docker-php-apache/tags/
+- https://hub.docker.com/r/elnebuloso/php-apache/
+- https://hub.docker.com/r/elnebuloso/php-apache/tags/
