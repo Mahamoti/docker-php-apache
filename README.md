@@ -1,6 +1,6 @@
 # docker-php-apache
 
-[![Docker Build Statu](https://img.shields.io/docker/build/elnebuloso/docker-php-apache.svg)](https://hub.docker.com/r/elnebuloso/docker-php-apache/builds/)
+[![Docker Build Statu](https://img.shields.io/docker/build/elnebuloso/php-apache.svg)](https://hub.docker.com/r/elnebuloso/php-apache/builds/)
 
 ## features
 
