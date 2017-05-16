@@ -5,6 +5,10 @@ MAINTAINER jeff.tunessen@gmail.com
 # terminal
 ENV TERM linux
 ENV DEBIAN_FRONTEND noninteractive
+
+# container environments
+ENV ELNEBULOSO_CONTAINER_NAME php-apache
+ENV ELNEBULOSO_CONTAINER_VERSION 1.2.0
 ENV APP_ENV production
 ENV APP_VHOST standard
 
@@ -67,17 +71,16 @@ RUN apt-get update \
     && rm -rf /tmp/*
 
 # configure apache
-COPY ./.docker/apache2/conf/servername.conf /etc/apache2/conf-available/servername.conf
-COPY ./.docker/apache2/vhosts/* /etc/apache2/sites-available/
-COPY ./.docker/apache2-foreground /usr/local/bin/apache2-foreground
-COPY ./VERSION /etc/elnebuloso/docker-ubuntu-1604-php71-apache/VERSION
+COPY .docker/apache2/conf/servername.conf /etc/apache2/conf-available/servername.conf
+COPY .docker/apache2/vhosts/ /etc/apache2/sites-available/
+COPY .docker/apache2-foreground /usr/local/bin/apache2-foreground
+COPY main/ /var/www/
 
 RUN a2enmod headers \
     && a2enmod rewrite \
     && a2enconf servername \
     && ln -sf /dev/stdout /var/log/apache2/access.log \
     && ln -sf /dev/stderr /var/log/apache2/error.log \
-    && ln -sf /dev/stderr /var/log/apache2/php-error.log \
     && chmod +x /usr/local/bin/apache2-foreground
 
 # manually set up the apache environment variables
