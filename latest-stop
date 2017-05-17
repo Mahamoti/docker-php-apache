@@ -1,0 +1,5 @@
+#!/bin/sh
+
+docker rm -f php-apache56
+docker rm -f php-apache70
+docker rm -f php-apache71

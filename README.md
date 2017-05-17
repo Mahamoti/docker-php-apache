@@ -60,24 +60,6 @@ This PHP Modules are available in PHP 5.6, PHP 7.0, PHP 7.1
 - php-zip
 
 
-## Testing the latest Images
-
-```text
-docker pull elnebuloso/php-apache:php56-latest \
-&& docker run --name php-apache56 -p=8080:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php56-latest
-```
-
-```text
-docker pull elnebuloso/php-apache:php70-latest \
-&& docker run --name php-apache70 -p=8080:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php70-latest
-```
-
-```text
-docker pull elnebuloso/php-apache:php71-latest \
-&& docker run --name php-apache71 -p=8080:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php71-latest
-```
-
-
 ### Environment Variables
 
 
