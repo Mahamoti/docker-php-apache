@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.3.0] - 2017-05-18
+### Changed
+- added missing php5.6-cli
+- added missing php7.0-cli
+- added missing php7.1-cli
+- updated layers by moving env variables
+
+
 ## [1.2.0] - 2017-05-16
 ### Changed
 - php error reporting in development vhost
