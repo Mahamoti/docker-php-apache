@@ -1,0 +1,41 @@
+#!/bin/sh
+
+while [ $# -gt 0 ]; do
+    arg=$1
+
+    case $arg in
+        start)
+            docker-compose up --build -d
+        ;;
+
+        stop)
+            docker-compose stop
+        ;;
+
+        latest.start)
+            docker pull elnebuloso/php-apache:php56-latest \
+            && docker run --name php-apache56 -p=8056:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php56-latest
+
+            docker pull elnebuloso/php-apache:php70-latest \
+            && docker run --name php-apache70 -p=8070:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php70-latest
+
+            docker pull elnebuloso/php-apache:php71-latest \
+            && docker run --name php-apache71 -p=8071:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php71-latest
+        ;;
+
+        latest.stop)
+            docker rm -f php-apache56
+            docker rm -f php-apache70
+            docker rm -f php-apache71
+        ;;
+
+        list)
+            echo start | stop | latest.start | latest.stop
+        ;;
+
+        *)
+            echo wrong option
+        ;;
+    esac
+    shift
+done
