@@ -1,0 +1,3 @@
+* * * * * root echo "today is $(date)" >> /var/log/today.log
+
+# end of crontab

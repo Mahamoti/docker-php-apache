@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.5.0] - 2017-06-09
+### Added
+- cron with demo crontab 'today'
+- logrotate with demo lograte 'today'
+
+
 ## [1.4.0] - 2017-06-08
 ### Added
 - installed libapache2-modsecurity, but not configured yet

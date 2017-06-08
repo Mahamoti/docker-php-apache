@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # install essentials
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends software-properties-common ca-certificates locales curl less nano \
+    && apt-get install -y --no-install-recommends software-properties-common ca-certificates locales curl less nano cron logrotate \
     && locale-gen en_US \
     && locale-gen en_US.UTF-8 \
     && locale-gen de_DE \
@@ -68,13 +68,15 @@ RUN apt-get update \
 
 ENV PHP_VERSION 7.0
 
-# configure apache
+# configure services
 COPY .docker/apache2/conf/security.conf /etc/apache2/conf-available/security.conf
 COPY .docker/apache2/conf/servername.conf /etc/apache2/conf-available/servername.conf
 COPY .docker/apache2/vhosts/ /etc/apache2/sites-available/
 COPY .docker/php/docker.ini /etc/php/${PHP_VERSION}/docker.ini
 COPY .docker/container-init /usr/local/bin/container-init
 COPY .docker/container-run /usr/local/bin/container-run
+COPY .docker/crontab/today /etc/cron.d/today
+COPY .docker/logrotate/today /etc/logrotate.d/today
 COPY main/ /var/www/
 
 RUN a2enmod headers \
@@ -83,9 +85,11 @@ RUN a2enmod headers \
     && a2enconf servername \
     && ln -sf /dev/stdout /var/log/apache2/access.log \
     && ln -sf /dev/stderr /var/log/apache2/error.log \
-    && chmod 644 /etc/apache2/conf-available/security.conf \
-    && chmod 644 /etc/apache2/conf-available/servername.conf \
-    && chmod 644 /etc/php/${PHP_VERSION}/docker.ini \
+    && chmod 0644 /etc/apache2/conf-available/security.conf \
+    && chmod 0644 /etc/apache2/conf-available/servername.conf \
+    && chmod 0644 /etc/cron.d/today \
+    && chmod 0644 /etc/logrotate.d/today \
+    && chmod 0644 /etc/php/${PHP_VERSION}/docker.ini \
     && chmod +x /usr/local/bin/container-init \
     && chmod +x /usr/local/bin/container-run
 
@@ -98,7 +102,7 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 
 # container environments
 ENV ELNEBULOSO_CONTAINER_NAME php-apache
-ENV ELNEBULOSO_CONTAINER_VERSION 1.4.0
+ENV ELNEBULOSO_CONTAINER_VERSION 1.5.0
 ENV APP_ENV production
 ENV APP_VHOST standard
 
