@@ -1,0 +1,54 @@
+#!/bin/bash
+
+################################################################################################
+
+set -e
+rm -f "$APACHE_PID_FILE"
+
+################################################################################################
+
+echo "selecting user defined vhost configuration"
+
+USER_DEFINED_VHOST=/var/www/.docker/apache2/vhost.$APP_VHOST.$APP_ENV.conf
+
+if [ -f $USER_DEFINED_VHOST ]; then
+    cp $USER_DEFINED_VHOST /etc/apache2/sites-available/vhost.$APP_VHOST.$APP_ENV.conf
+    echo "selecting user defined vhost configuration, selected"
+fi
+
+ln -nsf /etc/apache2/sites-available/vhost.$APP_VHOST.$APP_ENV.conf /etc/apache2/sites-enabled/000-default.conf
+
+################################################################################################
+
+echo "selecting user defined php configuration"
+
+USER_DEFINED_PHP=/var/www/.docker/php/docker.ini
+
+if [ -f $USER_DEFINED_PHP ]; then
+    cp $USER_DEFINED_PHP /etc/php/${PHP_VERSION}/docker.ini
+    echo "selecting user defined php configuration, selected"
+fi
+
+ln -nsf /etc/php/${PHP_VERSION}/docker.ini /etc/php/${PHP_VERSION}/apache2/conf.d/00-docker.ini
+ln -nsf /etc/php/${PHP_VERSION}/docker.ini /etc/php/${PHP_VERSION}/cli/conf.d/00-docker.ini
+
+################################################################################################
+
+echo "selecting user defined container-init"
+
+USER_DEFINED_INIT=/var/www/.docker/container-init
+
+if [ -f $USER_DEFINED_INIT ]; then
+    cp $USER_DEFINED_INIT /usr/local/bin/container-init
+    chmod +x /usr/local/bin/container-init
+    echo "selecting user defined container-init, selected"
+fi
+
+container-init
+
+################################################################################################
+
+echo "starting apache2 foreground"
+exec /usr/sbin/apache2ctl -D FOREGROUND
+
+################################################################################################

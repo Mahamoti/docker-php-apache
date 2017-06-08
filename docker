@@ -4,14 +4,6 @@ while [ $# -gt 0 ]; do
     arg=$1
 
     case $arg in
-        start)
-            docker-compose up --build -d
-        ;;
-
-        stop)
-            docker-compose stop
-        ;;
-
         latest.start)
             docker pull elnebuloso/php-apache:php56-latest \
             && docker run --name php-apache56 -p=8056:80 -e APP_VHOST=standard -e APP_ENV=development -d elnebuloso/php-apache:php56-latest
@@ -30,7 +22,7 @@ while [ $# -gt 0 ]; do
         ;;
 
         list)
-            echo start | stop | latest.start | latest.stop
+            echo latest.start | latest.stop
         ;;
 
         *)

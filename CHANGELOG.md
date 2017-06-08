@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.4.0] - 2017-06-08
+### Added
+- installed libapache2-modsecurity, but not configured yet
+
+### Changed
+- apache2 security update and configuration
+- php configuration, optional user definable
+- init container script, optional user definable
+- removed unused files
+
+
 ## [1.3.0] - 2017-05-18
 ### Changed
 - added missing php5.6-cli
