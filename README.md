@@ -106,6 +106,20 @@ If a File exists /var/www/.docker/apache2/vhost.`$APP_VHOST.$APP_ENV`.conf, this
 So when running your Container, you can choose your vhost File by setting the environment variables.
 
 
+### User Defined PHP configuration / usage
+
+This Container comes with a predefined PHP Configuration File. You can override this file.
+
+If a File exists /var/www/.docker/php/docker.ini, this file will be used, as your php configuration file.
+
+
+### User Defined INIT configuration / usage
+
+This Container comes with a predefined INIT Script. You can override this file. This Script will be executed before finally starting the apache webserver.
+
+If a File exists /var/www/.docker/container-init, this file will be used, as your init script.
+
+
 ## Developing this Container
 
 
